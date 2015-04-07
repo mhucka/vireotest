@@ -9,16 +9,18 @@
 
 # Change the following to the file name of the main LaTeX file.
 
-MAINFILE = test.tex
+MAIN_FILE = test.tex
 
 # .............................................................................
 # The rest below is generic and probably does not need to be changed.
 
-$(basename $(MAINFILE)).pdf: *.tex $(wildcard *.bib) Makefile
-	-pdflatex $(MAINFILE)
-	-bibtex $(MAINFILE)
-	-pdflatex $(MAINFILE)
-	-pdflatex $(MAINFILE)
+mainbase = $(basename $(MAIN_FILE))
+
+$(mainbase).pdf: *.tex $(wildcard *.bib) Makefile
+	-pdflatex $(mainbase)
+	-bibtex $(mainbase)
+	-pdflatex $(mainbase)
+	-pdflatex $(mainbase)
 
 clean:
 	-rm -f *.aux *.bbl *.blg *.log *.out *.loc *.toc *.pdf
