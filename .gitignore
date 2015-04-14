@@ -10,3 +10,4 @@ auto
 *.loc
 *.mp
 .git/COMMIT_EDITMSG
+venv

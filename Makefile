@@ -14,13 +14,25 @@ MAIN_FILE = test.tex
 # .............................................................................
 # The rest below is generic and probably does not need to be changed.
 
-mainbase = $(basename $(MAIN_FILE))
+basename = $(basename $(MAIN_FILE))
+pdf_file = $(addsuffix .pdf,$(basename))
+md5_file = $(addsuffix .md5,$(basename))
 
-$(mainbase).pdf: *.tex $(wildcard *.bib) Makefile
-	-pdflatex $(mainbase)
-	-bibtex $(mainbase)
-	-pdflatex $(mainbase)
-	-pdflatex $(mainbase)
+update:;
+	git stash
+	git pull origin master
+	make $(pdf_file)
+	md5sum $(pdf_file) > $(md5_file)
+	git add $(pdf_file) $(md5_file)
+	-git add index.html js css
+	git commit -m "Latest build."
+	git push origin gh-pages
+
+$(pdf_file): $(MAIN_FILE) Makefile $(wildcard *.tex) $(wildcard *.bib)
+	-pdflatex main
+	-bibtex main
+	-pdflatex main
+	-pdflatex main
 
 clean:
 	-rm -f *.aux *.bbl *.blg *.log *.out *.loc *.toc *.pdf
