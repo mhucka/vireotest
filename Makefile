@@ -29,10 +29,10 @@ update:;
 	git push origin gh-pages
 
 $(pdf_file): $(MAIN_FILE) Makefile $(wildcard *.tex) $(wildcard *.bib)
-	-pdflatex main
-	-bibtex main
-	-pdflatex main
-	-pdflatex main
+	-pdflatex $(MAIN_FILE)
+	-bibtex $(MAIN_FILE)
+	-pdflatex $(MAIN_FILE)
+	-pdflatex $(MAIN_FILE)
 
 clean:
 	-rm -f *.aux *.bbl *.blg *.log *.out *.loc *.toc *.pdf
