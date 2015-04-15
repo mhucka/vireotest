@@ -24,8 +24,8 @@ update:;
 	make $(pdf_file)
 	md5sum $(pdf_file) > $(md5_file)
 	git add $(pdf_file) $(md5_file)
-	-git add index.html js css
-	git commit -m "Latest build."
+	-git add --ignore-errors index.html js css
+	-git commit -m "Latest build."
 	git push origin gh-pages -f
 
 $(pdf_file): $(MAIN_FILE) Makefile $(wildcard *.tex) $(wildcard *.bib)
