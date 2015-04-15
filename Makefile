@@ -24,7 +24,7 @@ update:;
 	make $(pdf_file)
 	md5sum $(pdf_file) > $(md5_file)
 	git add $(pdf_file) $(md5_file)
-	-git add --ignore-errors index.html js css
+	-git add index.html js css
 	-git commit -m "Latest build."
 	git push origin gh-pages -f
 
